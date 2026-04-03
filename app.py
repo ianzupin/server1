@@ -102,7 +102,7 @@ def login():
         else:
             return "Wrong login"
 
-    return render_template("login.html")
+    return "LOGIN PAGE WORKS"
 
 # 2FA
 @app.route("/2fa", methods=["GET","POST"])
