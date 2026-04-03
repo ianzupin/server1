@@ -1,0 +1,9 @@
+flask
+flask-socketio
+flask-login
+werkzeug
+geocoder
+pyotp
+itsdangerous
+flask-limiter
+flask-talisman

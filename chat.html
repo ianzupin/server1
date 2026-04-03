@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chat</title>
+<style>
+body {
+  background: black;
+  color: lime;
+  font-family: monospace;
+}
+#chat {
+  height: 300px;
+  overflow-y: scroll;
+  border: 1px solid lime;
+  padding: 10px;
+}
+input {
+  background: black;
+  color: lime;
+  border: 1px solid lime;
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
+</head>
+
+<body>
+
+<h2>💬 Hacker Chat</h2>
+
+<div id="chat"></div>
+
+<input id="msg" placeholder="napiši...">
+<button onclick="sendMsg()">Send</button>
+
+<script>
+var socket = io();
+
+socket.on("message", function(msg){
+    let chat = document.getElementById("chat");
+    chat.innerHTML += msg + "<br>";
+    chat.scrollTop = chat.scrollHeight;
+});
+
+function sendMsg(){
+    let input = document.getElementById("msg");
+    socket.send(input.value);
+    input.value = "";
+}
+</script>
+
+</body>
+</html>

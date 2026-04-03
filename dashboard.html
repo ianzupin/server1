@@ -1,0 +1,66 @@
+<a href="/logout">Logout</a>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background:black;
+  color:lime;
+  font-family:monospace;
+}
+
+.box {
+  border:1px solid lime;
+  padding:10px;
+  margin:10px;
+}
+
+#chat {
+  height:200px;
+  overflow-y:scroll;
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
+</head>
+
+<body>
+
+<h2>💻 HACKER DASHBOARD</h2>
+
+<div class="box">
+User: {{user}}<br>
+IP: {{ip}}<br>
+Location: {{location}}
+</div>
+
+<div class="box">
+<h3>Online Users</h3>
+{% for u in users %}
+<p>{{u}}</p>
+{% endfor %}
+</div>
+
+<div class="box">
+<h3>Chat</h3>
+<div id="chat"></div>
+<input id="msg">
+<button onclick="sendMsg()">Send</button>
+</div>
+
+<script>
+var socket = io();
+
+socket.on("message", function(msg){
+    document.getElementById("chat").innerHTML += msg + "<br>";
+});
+
+function sendMsg(){
+    let input = document.getElementById("msg");
+    socket.send(input.value);
+    input.value = "";
+}
+</script>
+
+</body>
+</html>
