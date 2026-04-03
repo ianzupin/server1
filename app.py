@@ -36,10 +36,10 @@ login_manager.login_view = "login"
 serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
 
 # load users
-try:
+if os.path.exists("users.json"):
     with open("users.json") as f:
         users_db = json.load(f)
-except:
+else:
     users_db = {}
 
 # brute force protection
